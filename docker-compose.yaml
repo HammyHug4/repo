@@ -1,0 +1,20 @@
+services:
+  nginx:
+    image: nginx:alpine # img yang digunakan
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx:/usr/share/nginx/html:ro
+    networks:
+      - stkp_network
+
+  # disini mysql
+
+networks:
+  stkp_network:
+    driver: bridge
+
+# ini web server saja gak nyimpen
+# cari image lain mysql
+# suruh docker ps untuk image mongo db
