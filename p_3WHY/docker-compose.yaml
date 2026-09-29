@@ -1,0 +1,20 @@
+services:
+  server1:
+    build: .
+    command: python -u app.py server1
+    ports:
+      - "5001:5001"
+
+  server2:
+    build: .
+    command: python -u app.py server2
+    ports:
+      - "5002:5002"
+
+  client:
+    build: .
+    command: python -u app.py client
+    depends_on:
+      - server1
+      - server2
+

@@ -1,0 +1,32 @@
+services:
+  flynn:
+    build: .
+    command: python mimd.py #ganti dengan sisd.py simd.py misd.py mimd.py 
+    volumes:
+      - ./app:/app
+      
+  singlecore:
+    build: .
+    container_name: singlecore
+    command: python mimd-parallel.py
+    volumes:
+      - ./app:/app
+    environment:
+      - CORES_USED=1
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          
+  parallel:
+    build: .
+    container_name: parallel
+    command: python mimd-parallel.py
+    volumes:
+      - ./app:/app
+    environment:
+      - CORES_USED=10
+    deploy:
+      resources:
+        limits:
+          cpus: '10.0'
